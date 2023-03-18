@@ -52,6 +52,9 @@
             <xs:element name="positionY" type="xs:double" />
         </xs:sequence>
     </xs:complexType>
+    <xs:element name="todo">
+        <xs:complexType/>
+    </xs:element>
     <xs:element name="CaveFile">
         <xs:complexType>
             <xs:sequence>
@@ -66,7 +69,19 @@
                                     <xs:sequence>
                                         <xs:element name="attachStationA" type="xs:nonNegativeInteger" />
                                         <xs:element name="attachStationB" type="xs:nonNegativeInteger" />
-                                        <xs:element name="attachedDensityGraph" />
+                                        <xs:element name="attachedDensityGraph">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="gridSize" type="xs:float" />
+                                                    <xs:element name="stdAzimut" type="xs:float" />
+                                                    <xs:element name="stdLength" type="xs:float" />
+                                                    <xs:element name="stdDepth" type="xs:float" />
+                                                    <xs:element name="confidencePercent" type="xs:float" />
+                                                    <xs:element name="centerX" type="xs:float" />
+                                                    <xs:element name="centerY" type="xs:float" />
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
                                         <xs:element name="fromAction">
                                             <xs:simpleType>
                                                 <xs:restriction base="xs:string">
@@ -177,8 +192,8 @@
                 </xs:element>
     
                 <xs:element name="useMagneticAzimuth" type="xs:boolean" />
-                <xs:element name="Constraints" />
-                <xs:element name="CartoLine" />
+                <xs:element name="Constraints" type="emptyElement" />
+                <xs:element name="CartoLine" type="emptyElement" />
                 <xs:element name="CartoPage">
                     <xs:complexType>
                         <xs:sequence>
@@ -207,10 +222,10 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="CartoRectangle" />
-                <xs:element name="CartoSelection" />
-                <xs:element name="CartoEllipse" />
-                <xs:element name="CartoSpline" />
+                <xs:element name="CartoRectangle" type="todo" />
+                <xs:element name="CartoSelection" type="todo" />
+                <xs:element name="CartoEllipse" type="todo" />
+                <xs:element name="CartoSpline" type="todo" />
                 <xs:element name="Layers">
                     <xs:complexType>
                         <xs:sequence>
@@ -218,9 +233,8 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="CartoOverlay" />
-                <xs:element name="CartoLinkedSurface" />
-
+                <xs:element name="CartoOverlay" type="todo" />
+                <xs:element name="CartoLinkedSurface" type="todo" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
