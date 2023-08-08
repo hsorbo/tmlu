@@ -52,9 +52,8 @@
             <xs:element name="positionY" type="xs:double" />
         </xs:sequence>
     </xs:complexType>
-    <xs:element name="todo">
-        <xs:complexType/>
-    </xs:element>
+    <xs:complexType name="todo">
+    </xs:complexType>
     <xs:element name="CaveFile">
         <xs:complexType>
             <xs:sequence>
@@ -192,8 +191,8 @@
                 </xs:element>
     
                 <xs:element name="useMagneticAzimuth" type="xs:boolean" />
-                <xs:element name="Constraints" type="emptyElement" />
-                <xs:element name="CartoLine" type="emptyElement" />
+                <xs:element name="Constraints" type="todo" />
+                <xs:element name="CartoLine" type="todo" />
                 <xs:element name="CartoPage">
                     <xs:complexType>
                         <xs:sequence>
