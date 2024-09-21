@@ -110,26 +110,145 @@
                             <xs:element name="SRVD" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="AZ" type="xs:double" />
-                                        <xs:element name="CID" type="xs:int" />
-                                        <xs:element name="CL" type="xs:string" />
-                                        <xs:element name="CM" type="xs:string" />
-                                        <xs:element name="DT" type="xs:date" />
-                                        <xs:element name="DP" type="xs:double" />
-                                        <xs:element name="DPI" type="xs:float" />
-                                        <xs:element name="D" type="xs:double" />
-                                        <xs:element name="EXC" type="xs:boolean" />
-                                        <xs:element name="EX" type="xs:string" />
-                                        <xs:element name="FRID" type="xs:int" />
-                                        <xs:element name="ID" type="xs:int" />
-                                        <xs:element name="INC" type="xs:float" />
-                                        <xs:element name="LT" type="xs:double" />
-                                        <xs:element name="L" type="xs:double" />
-                                        <xs:element name="LG" type="xs:float" />
-                                        <xs:element name="LK" type="xs:boolean" />
-                                        <xs:element name="LGT" type="xs:double" />
-                                        <xs:element name="NM" type="xs:string" />
+                                        <xs:element name="AZ" type="xs:double">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Azimuth
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="CID" type="xs:int">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Closure to ID
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="CL" type="xs:string">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Color
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="CM" type="xs:string">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Comment
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="DT" type="xs:date">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Date
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="DP" type="xs:double">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Depth
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="DPI" type="xs:float">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Depth in
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="D" type="xs:double">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Down
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="EXC" type="xs:boolean">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Excluded
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="EX" type="xs:string">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Explorer
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="FRID" type="xs:int">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    From ID
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="ID" type="xs:int">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    ID
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="INC" type="xs:float">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Inclination
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="LT" type="xs:double">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Latitude
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="L" type="xs:double">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Left
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="LG" type="xs:float">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Length
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="LK" type="xs:boolean">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Locked
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="LGT" type="xs:double">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Longitude
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="NM" type="xs:string">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Name
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
                                         <xs:element name="PRTY">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Profile Type
+                                                </xs:documentation>
+                                            </xs:annotation>
                                             <xs:simpleType>
                                                 <xs:restriction base="xs:string">
                                                     <xs:enumeration value="VERTICAL" />
@@ -137,25 +256,100 @@
                                                 </xs:restriction>
                                             </xs:simpleType>
                                         </xs:element>
-                                        <xs:element name="R" type="xs:double" />
-                                        <xs:element name="SC" type="xs:string" />
+                                        <xs:element name="R" type="xs:double">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Right
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="SC" type="xs:string">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Section
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
                                         <xs:element name="SH">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Shape
+                                                </xs:documentation>
+                                            </xs:annotation>
                                             <xs:complexType>
                                                 <xs:sequence>
-                                                    <xs:element name="HPRA" type="xs:boolean" />
-                                                    <xs:element name="HPRT" type="xs:boolean" />
-                                                    <xs:element name="PRAZ" type="xs:float" />
-                                                    <xs:element name="PRT" type="xs:float" />
+                                                    <xs:element name="HPRA" type="xs:boolean">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en">
+                                                                Has Profile Azimuth
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="HPRT" type="xs:boolean">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en">
+                                                                Has Profile Tilt
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="PRAZ" type="xs:float">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en">
+                                                                Profile Azimuth
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="PRT" type="xs:float">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en">
+                                                                Profile Tilt
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
                                                     <xs:element name="RC">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en">
+                                                                Radius Collection
+                                                            </xs:documentation>
+                                                        </xs:annotation>
                                                         <xs:complexType>
                                                             <xs:sequence>
                                                                 <xs:element name="RV" maxOccurs="unbounded">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en">
+                                                                            Radius Vector
+                                                                        </xs:documentation>
+                                                                    </xs:annotation>            
                                                                     <xs:complexType>
                                                                         <xs:sequence>
-                                                                            <xs:element name="ag" type="xs:float" />
-                                                                            <xs:element name="lg" type="xs:float" />
-                                                                            <xs:element name="tc" type="xs:float" />
-                                                                            <xs:element name="tp" type="xs:float" />
+                                                                            <xs:element name="ag" type="xs:float">
+                                                                                <xs:annotation>
+                                                                                    <xs:documentation xml:lang="en">
+                                                                                        Angle
+                                                                                    </xs:documentation>
+                                                                                </xs:annotation>            
+                                                                            </xs:element>
+                                                                            <xs:element name="lg" type="xs:float">
+                                                                                <xs:annotation>
+                                                                                    <xs:documentation xml:lang="en">
+                                                                                        Length
+                                                                                    </xs:documentation>
+                                                                                </xs:annotation>            
+                                                                            </xs:element>
+                                                                            <xs:element name="tc" type="xs:float">
+                                                                                <xs:annotation>
+                                                                                    <xs:documentation xml:lang="en">
+                                                                                        Tension Corridor
+                                                                                    </xs:documentation>
+                                                                                </xs:annotation>            
+                                                                            </xs:element>
+                                                                            <xs:element name="tp" type="xs:float">
+                                                                                <xs:annotation>
+                                                                                    <xs:documentation xml:lang="en">
+                                                                                        Tension Profile
+                                                                                    </xs:documentation>
+                                                                                </xs:annotation>            
+                                                                            </xs:element>
                                                                         </xs:sequence>
                                                                     </xs:complexType>
                                                                 </xs:element>
@@ -166,6 +360,11 @@
                                             </xs:complexType>
                                         </xs:element>
                                         <xs:element name="TY">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Type
+                                                </xs:documentation>
+                                            </xs:annotation>
                                             <xs:simpleType>
                                                 <xs:restriction base="xs:string">
                                                     <xs:enumeration value="REAL" />
@@ -175,7 +374,13 @@
                                                 </xs:restriction>
                                             </xs:simpleType>
                                         </xs:element>
-                                        <xs:element name="U" type="xs:double" />
+                                        <xs:element name="U" type="xs:double">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">
+                                                    Up
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
