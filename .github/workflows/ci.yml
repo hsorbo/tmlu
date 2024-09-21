@@ -8,8 +8,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
       - name: Build .net
-        working-directory: src
         run: |
+          find .
           dotnet tool install --global dotnet-xscgen --version 2.1.1162
           NS="Ariane.SaveFile.Contract"
           mkdir $NS
