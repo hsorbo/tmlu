@@ -34,22 +34,100 @@
             <xs:element name="visible" type="xs:boolean" />
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="corner">
+    <xs:simpleType name="type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NONE" />
+            <xs:enumeration value="GRIP" />
+            <xs:enumeration value="TANGENTGRIP" />
+            <xs:enumeration value="SPLINEGRIP" />
+            <xs:enumeration value="LINE" />
+            <xs:enumeration value="PAGE" />
+            <xs:enumeration value="RECTANGLE" />
+            <xs:enumeration value="ELLIPSE" />
+            <xs:enumeration value="SPLINE" />
+            <xs:enumeration value="OVERLAY" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:group name="commonA">
         <xs:sequence>
             <xs:element name="editable" type="xs:boolean" />
             <xs:element name="ID" type="xs:int" />
             <xs:element name="layer" type="layer" />
-            <xs:element name="type">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="NONE" />
-                        <xs:enumeration value="GRIP" />
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="commonB">
+        <xs:sequence>
+            <xs:element name="type" type="type" />
             <xs:element name="ZOrder" type="xs:nonNegativeInteger" />
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="common1">
+        <xs:sequence>
+            <xs:group ref="commonA"/>
+            <xs:group ref="commonB"/>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="common2">
+        <xs:sequence>
+            <xs:group ref="commonA"/>
+            <xs:element name="style" type="style" />
+            <xs:group ref="commonB"/>
+        </xs:sequence>
+    </xs:group>
+    <xs:complexType name="pos">
+        <xs:sequence>
+            <xs:group ref="common1"/>
             <xs:element name="positionX" type="xs:double" />
             <xs:element name="positionY" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="constraint">
+        <xs:sequence>
+            <xs:group ref="common1"/>
+            <xs:element name="displayPosition" type="xs:string" />
+            <xs:element name="max" type="xs:double" />
+            <xs:element name="min" type="xs:double" />
+            <xs:element name="position" type="pos"/>
+            <xs:element name="scale" type="xs:double" />
+            <xs:element name="step" type="xs:double" />
+            <xs:element name="value" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="splineGrip">
+        <xs:sequence>
+            <xs:group ref="common1"/>
+            <xs:element name="positionX" type="xs:double" />
+            <xs:element name="positionY" type="xs:double" />
+            <xs:element name="activeTangent" type="xs:boolean" />
+            <xs:element name="editActive" type="xs:boolean" />
+            <xs:element name="magnetActive" type="xs:boolean" />
+            <xs:element name="originalPositionX" type="xs:double" />
+            <xs:element name="originalPositionY" type="xs:double" />
+            <xs:element name="tangentGrips">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:group ref="common1"/>
+                        <xs:element name="centerX" type="xs:double" />
+                        <xs:element name="centerY" type="xs:double" />
+                        <xs:element name="inGrip" type="pos" />
+                        <xs:element name="outGrip" type="pos" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="element">
+        <xs:sequence>
+            <xs:group ref="common2"/>
+            <xs:element name="SplineGrips">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="splineGrips" type="splineGrip" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="closed" type="xs:boolean" />
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="todo">
@@ -319,7 +397,7 @@
                                                                         <xs:documentation xml:lang="en">
                                                                             Radius Vector
                                                                         </xs:documentation>
-                                                                    </xs:annotation>            
+                                                                    </xs:annotation>
                                                                     <xs:complexType>
                                                                         <xs:sequence>
                                                                             <xs:element name="ag" type="xs:float">
@@ -327,28 +405,28 @@
                                                                                     <xs:documentation xml:lang="en">
                                                                                         Angle
                                                                                     </xs:documentation>
-                                                                                </xs:annotation>            
+                                                                                </xs:annotation>
                                                                             </xs:element>
                                                                             <xs:element name="lg" type="xs:float">
                                                                                 <xs:annotation>
                                                                                     <xs:documentation xml:lang="en">
                                                                                         Length
                                                                                     </xs:documentation>
-                                                                                </xs:annotation>            
+                                                                                </xs:annotation>
                                                                             </xs:element>
                                                                             <xs:element name="tc" type="xs:float">
                                                                                 <xs:annotation>
                                                                                     <xs:documentation xml:lang="en">
                                                                                         Tension Corridor
                                                                                     </xs:documentation>
-                                                                                </xs:annotation>            
+                                                                                </xs:annotation>
                                                                             </xs:element>
                                                                             <xs:element name="tp" type="xs:float">
                                                                                 <xs:annotation>
                                                                                     <xs:documentation xml:lang="en">
                                                                                         Tension Profile
                                                                                     </xs:documentation>
-                                                                                </xs:annotation>            
+                                                                                </xs:annotation>
                                                                             </xs:element>
                                                                         </xs:sequence>
                                                                     </xs:complexType>
@@ -397,39 +475,86 @@
     
                 <xs:element name="useMagneticAzimuth" type="xs:boolean" />
                 <xs:element name="Constraints" type="todo" />
-                <xs:element name="CartoLine" type="todo" />
+                <xs:element name="CartoLine">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="lineElements" type="element" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
                 <xs:element name="CartoPage">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="pageRectangles" minOccurs="0">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="editable" type="xs:boolean" />
-                                        <xs:element name="ID" type="xs:nonNegativeInteger" />
-                                        <xs:element name="layer" type="layer" />
-                                        <xs:element name="style" type="style" />
-                                        <xs:element name="type" type="xs:string" />
-                                        <xs:element name="ZOrder" type="xs:nonNegativeInteger" />
-                                        <xs:element name="endCorner" type="corner" />
-                                        <xs:element name="interACorner" type="corner" />
-                                        <xs:element name="interBCorner" type="corner" />
-                                        <xs:element name="startCorner" type="corner" />
-                                        <xs:element name="bottomLeftGrip" type="corner" />
-                                        <xs:element name="bottomRightGrip" type="corner" />
-                                        <xs:element name="centerGrip" type="corner" />
+                                        <xs:group ref="common2"/>
+                                        <xs:element name="endCorner" type="pos" />
+                                        <xs:element name="interACorner" type="pos" />
+                                        <xs:element name="interBCorner" type="pos" />
+                                        <xs:element name="startCorner" type="pos" />
+                                        <xs:element name="bottomLeftGrip" type="pos" />
+                                        <xs:element name="bottomRightGrip" type="pos" />
+                                        <xs:element name="centerGrip" type="pos" />
                                         <xs:element name="paperType" type="xs:string" />
-                                        <xs:element name="topLeftGrip" type="corner" />
-                                        <xs:element name="topRightGrip" type="corner" />
+                                        <xs:element name="topLeftGrip" type="pos" />
+                                        <xs:element name="topRightGrip" type="pos" />
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="CartoRectangle" type="todo" />
-                <xs:element name="CartoSelection" type="todo" />
-                <xs:element name="CartoEllipse" type="todo" />
-                <xs:element name="CartoSpline" type="todo" />
+                <xs:element name="CartoRectangle">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="rectangleElements" type="element" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CartoSelection">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="selectionRectangleElements" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:group ref="common2"/>
+                                        <xs:element name="endCorner" type="pos" />
+                                        <xs:element name="interACorner" type="pos" />
+                                        <xs:element name="interBCorner" type="pos" />
+                                        <xs:element name="startCorner" type="pos" />
+                                        <xs:element name="heightConstraint" type="constraint"/>
+                                        <xs:element name="widthConstraint" type="constraint"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CartoEllipse">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="ellipseElements" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:group ref="common2"/>
+                                        <xs:element name="center" type="pos" />
+                                        <xs:element name="radiusX" type="xs:double" />
+                                        <xs:element name="radiusY" type="xs:double" />
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CartoSpline">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="splineElements" type="element" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+
+                </xs:element>
                 <xs:element name="Layers">
                     <xs:complexType>
                         <xs:sequence>
@@ -437,7 +562,27 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="CartoOverlay" type="todo" />
+                <xs:element name="CartoOverlay">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="overlayElements" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:group ref="common2"/>
+                                        <xs:element name="endCorner" type="pos" />
+                                        <xs:element name="interACorner" type="pos" />
+                                        <xs:element name="interBCorner" type="pos" />
+                                        <xs:element name="startCorner" type="pos" />
+                                        <xs:element name="designation" type="xs:string"/>
+                                        <xs:element name="imageName" type="xs:string"/>
+                                        <xs:element name="imagePath" type="xs:string"/>
+                                        <xs:element name="rotationAngle" type="xs:double" />
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
                 <xs:element name="CartoLinkedSurface" type="todo" />
             </xs:sequence>
         </xs:complexType>
