@@ -5,11 +5,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
   steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 6.0.x
+    - uses: actions/checkout@v4
+    - uses: actions/setup-dotnet@v4
     - name: Build .net
       working-directory: src
       run: |
