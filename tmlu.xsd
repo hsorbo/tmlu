@@ -29,15 +29,15 @@
 
     <xs:complexType name="Style">
         <xs:sequence>
-            <xs:element name="dashArray" type="xs:float" minOccurs="0" maxOccurs="unbounded" />
-            <xs:element name="dashScale" type="xs:float" />
+            <xs:element name="dashArray" type="xs:double" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="dashScale" type="xs:double" />
             <xs:element name="fillColorString" type="xs:string" />
             <xs:element name="lineType" type="LineType"/>
-            <xs:element name="lineTypeScale" type="xs:float" />
-            <xs:element name="opacity" type="xs:float" />
+            <xs:element name="lineTypeScale" type="xs:double" />
+            <xs:element name="opacity" type="xs:double" />
             <xs:element name="sizeMode" type="SizeMode" />
             <xs:element name="strokeColorString" type="xs:string" />
-            <xs:element name="strokeThickness" type="xs:float" />
+            <xs:element name="strokeThickness" type="xs:double" />
         </xs:sequence>
     </xs:complexType>
 
@@ -250,28 +250,28 @@
 
     <xs:complexType name="RadiusVector">
         <xs:sequence>
-            <xs:element name="ag" type="xs:float">
+            <xs:element name="ag" type="xs:double">
                 <xs:annotation>
                     <xs:documentation xml:lang="en">
                         Angle
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="lg" type="xs:float">
+            <xs:element name="lg" type="xs:double">
                 <xs:annotation>
                     <xs:documentation xml:lang="en">
                         Length
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="tc" type="xs:float">
+            <xs:element name="tc" type="xs:double">
                 <xs:annotation>
                     <xs:documentation xml:lang="en">
                         Tension Corridor
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="tp" type="xs:float">
+            <xs:element name="tp" type="xs:double">
                 <xs:annotation>
                     <xs:documentation xml:lang="en">
                         Tension Profile
@@ -297,14 +297,14 @@
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="PRAZ" type="xs:float">
+            <xs:element name="PRAZ" type="xs:double">
                 <xs:annotation>
                     <xs:documentation xml:lang="en">
                         Profile Azimuth
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="PRT" type="xs:float">
+            <xs:element name="PRT" type="xs:double">
                 <xs:annotation>
                     <xs:documentation xml:lang="en">
                         Profile Tilt
@@ -392,7 +392,7 @@
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="DPI" type="xs:float">
+            <xs:element name="DPI" type="xs:double">
                 <xs:annotation>
                     <xs:documentation xml:lang="en">
                         Depth in
@@ -434,7 +434,7 @@
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="INC" type="xs:float">
+            <xs:element name="INC" type="xs:double">
                 <xs:annotation>
                     <xs:documentation xml:lang="en">
                         Inclination
@@ -455,7 +455,7 @@
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="LG" type="xs:float">
+            <xs:element name="LG" type="xs:double">
                 <xs:annotation>
                     <xs:documentation xml:lang="en">
                         Length
@@ -544,13 +544,13 @@
             <xs:element name="attachedDensityGraph">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="gridSize" type="xs:float" />
-                        <xs:element name="stdAzimut" type="xs:float" />
-                        <xs:element name="stdLength" type="xs:float" />
-                        <xs:element name="stdDepth" type="xs:float" />
-                        <xs:element name="confidencePercent" type="xs:float" />
-                        <xs:element name="centerX" type="xs:float" />
-                        <xs:element name="centerY" type="xs:float" />
+                        <xs:element name="gridSize" type="xs:double" />
+                        <xs:element name="stdAzimut" type="xs:double" />
+                        <xs:element name="stdLength" type="xs:double" />
+                        <xs:element name="stdDepth" type="xs:double" />
+                        <xs:element name="confidencePercent" type="xs:double" />
+                        <xs:element name="centerX" type="xs:double" />
+                        <xs:element name="centerY" type="xs:double" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -581,7 +581,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="caveName" type="xs:string" />
-                <xs:element name="firstStartAbsoluteElevation" type="xs:float" />
+                <xs:element name="firstStartAbsoluteElevation" type="xs:double" />
                 <xs:element name="geoCoding" type="xs:string" minOccurs="0" maxOccurs="1" />
                 <xs:element name="ListAnnotation">
                     <xs:complexType>
