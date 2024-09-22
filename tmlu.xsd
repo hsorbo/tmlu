@@ -75,33 +75,14 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:group name="commonA">
+    <xs:group name="Element">
         <xs:sequence>
             <xs:element name="editable" type="xs:boolean" />
             <xs:element name="ID" type="xs:int" />
             <xs:element name="layer" type="Layer" />
-        </xs:sequence>
-    </xs:group>
-
-    <xs:group name="commonB">
-        <xs:sequence>
+            <xs:element name="style" type="Style" minOccurs="0" maxOccurs="1" />
             <xs:element name="type" type="ElementType" />
             <xs:element name="ZOrder" type="xs:nonNegativeInteger" />
-        </xs:sequence>
-    </xs:group>
-
-    <xs:group name="common1">
-        <xs:sequence>
-            <xs:group ref="commonA"/>
-            <xs:group ref="commonB"/>
-        </xs:sequence>
-    </xs:group>
-
-    <xs:group name="Element">
-        <xs:sequence>
-            <xs:group ref="commonA"/>
-            <xs:element name="style" type="Style" />
-            <xs:group ref="commonB"/>
         </xs:sequence>
     </xs:group>
 
@@ -117,7 +98,7 @@
 
     <xs:group name="PointBase">
         <xs:sequence>
-            <xs:group ref="common1"/>
+            <xs:group ref="Element"/>
             <xs:element name="positionX" type="xs:double" />
             <xs:element name="positionY" type="xs:double" />
         </xs:sequence>
@@ -143,7 +124,7 @@
 
     <xs:complexType name="ConstraintSpinner">
         <xs:sequence>
-            <xs:group ref="common1"/>
+            <xs:group ref="Element"/>
             <xs:element name="displayPosition" type="DisplayPosition" />
             <xs:element name="max" type="xs:double" />
             <xs:element name="min" type="xs:double" />
@@ -156,7 +137,7 @@
 
     <xs:complexType name="TangentGrips">
         <xs:sequence>
-            <xs:group ref="common1"/>
+            <xs:group ref="Element"/>
             <xs:element name="centerX" type="xs:double" />
             <xs:element name="centerY" type="xs:double" />
             <xs:element name="inGrip" type="Grip" />
