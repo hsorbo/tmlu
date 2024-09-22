@@ -200,8 +200,14 @@
 
     <xs:complexType name="LinkedSurfaceElement">
         <xs:sequence>
-            <xs:group ref="Element"/>
-            <!-- TODO -->
+            <xs:group ref="SplineElementBase"/>
+            <xs:element name="LinkIDs">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="linkIDList" type="xs:int" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
 
