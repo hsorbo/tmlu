@@ -82,7 +82,7 @@
             <xs:element name="layer" type="Layer" />
             <xs:element name="style" type="Style" minOccurs="0" maxOccurs="1" />
             <xs:element name="type" type="ElementType" />
-            <xs:element name="ZOrder" type="xs:nonNegativeInteger" />
+            <xs:element name="ZOrder" type="xs:int" />
         </xs:sequence>
     </xs:group>
 
@@ -533,8 +533,8 @@
 
     <xs:complexType name="Annotation">
         <xs:sequence>
-            <xs:element name="attachStationA" type="xs:nonNegativeInteger" />
-            <xs:element name="attachStationB" type="xs:nonNegativeInteger" />
+            <xs:element name="attachStationA" type="xs:int" />
+            <xs:element name="attachStationB" type="xs:int" />
             <xs:element name="attachedDensityGraph">
                 <xs:complexType>
                     <xs:sequence>
@@ -558,7 +558,7 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
-            <xs:element name="ID" type="xs:nonNegativeInteger" />
+            <xs:element name="ID" type="xs:int" />
             <xs:element name="message" type="xs:string" />
             <xs:element name="type" type="TypeAnnotation"/>
         </xs:sequence>
