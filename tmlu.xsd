@@ -214,7 +214,12 @@
     <xs:complexType name="Constraint">
         <xs:sequence>
             <xs:group ref="Element"/>
-            <!-- TODO -->
+            <xs:element name="azimut" type="xs:double" />
+            <xs:element name="distance" type="xs:double" />
+            <xs:element name="originStationID" type="xs:int" />
+            <xs:element name="originalStationPositionX" type="xs:double" />
+            <xs:element name="originalStationPositionY" type="xs:double" />
+            <xs:element name="targetElementID" type="xs:int" />
         </xs:sequence>
     </xs:complexType>
 
