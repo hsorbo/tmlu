@@ -542,33 +542,35 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:complexType name="DensityGraph">
+        <xs:sequence>
+            <xs:element name="gridSize" type="xs:double" />
+            <xs:element name="stdAzimut" type="xs:double" />
+            <xs:element name="stdLength" type="xs:double" />
+            <xs:element name="stdDepth" type="xs:double" />
+            <xs:element name="confidencePercent" type="xs:double" />
+            <xs:element name="centerX" type="xs:double" />
+            <xs:element name="centerY" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--
+    <xs:simpleType name="FromAction">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Distance" />
+            <xs:enumeration value="Swim Distance" />
+            <xs:enumeration value="Gas Usage" />
+            <xs:enumeration value="Confidence Zone" />
+        </xs:restriction>
+    </xs:simpleType>
+    -->
+
     <xs:complexType name="Annotation">
         <xs:sequence>
             <xs:element name="attachStationA" type="xs:int" />
             <xs:element name="attachStationB" type="xs:int" />
-            <xs:element name="attachedDensityGraph">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="gridSize" type="xs:double" />
-                        <xs:element name="stdAzimut" type="xs:double" />
-                        <xs:element name="stdLength" type="xs:double" />
-                        <xs:element name="stdDepth" type="xs:double" />
-                        <xs:element name="confidencePercent" type="xs:double" />
-                        <xs:element name="centerX" type="xs:double" />
-                        <xs:element name="centerY" type="xs:double" />
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="fromAction">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="Distance" />
-                        <xs:enumeration value="Swim Distance" />
-                        <xs:enumeration value="Gas Usage" />
-                        <xs:enumeration value="Confidence Zone" />
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
+            <xs:element name="attachedDensityGraph" type="DensityGraph"/>
+            <xs:element name="fromAction" type="xs:string"/>
             <xs:element name="ID" type="xs:int" />
             <xs:element name="message" type="xs:string" />
             <xs:element name="type" type="TypeAnnotation"/>
