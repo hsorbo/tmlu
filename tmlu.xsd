@@ -266,99 +266,10 @@
         </xs:sequence>
     </xs:complexType>
 
-    <xs:element name="CaveFile">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="caveName" type="xs:string" />
-                <xs:element name="firstStartAbsoluteElevation" type="xs:double" />
-                <xs:element name="geoCoding" type="xs:string" minOccurs="0" maxOccurs="1" />
-                <xs:element name="ListAnnotation">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="Annotation" type="Annotation" minOccurs="0" maxOccurs="unbounded" />
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="Data">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="SRVD" type="SurveyData" minOccurs="0" maxOccurs="unbounded" />
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="unit" type="Unit" />
-                <xs:element name="useMagneticAzimuth" type="xs:boolean" />
-                <xs:element name="Constraints">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="constraints" type="Constraint" minOccurs="0" maxOccurs="unbounded" />
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="CartoLine">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="lineElements" type="LineElement" minOccurs="0" maxOccurs="unbounded" />
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="CartoPage">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="pageRectangles" type="PageRectangle" minOccurs="0" maxOccurs="unbounded"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="CartoRectangle">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="rectangleElements" type="RectangleElement" minOccurs="0" maxOccurs="unbounded" />
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="CartoSelection">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="selectionRectangleElements" type="SelectionRectangle" minOccurs="0" maxOccurs="unbounded" />
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="CartoEllipse">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="ellipseElements" type="EllipseElement" minOccurs="0" maxOccurs="unbounded"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="CartoSpline">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="splineElements" type="SplineElement" minOccurs="0" maxOccurs="unbounded" />
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="Layers">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="layerList" type="Layer" minOccurs="0" maxOccurs="unbounded" />
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="CartoOverlay">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="overlayElements" type="OverlayRectangle" minOccurs="0" maxOccurs="unbounded" />
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="CartoLinkedSurface">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="linkedSurfaceElements" type="LinkedSurfaceElement" minOccurs="0" maxOccurs="unbounded" />
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+    <xs:complexType name="SurveyDataCollection">
+        <xs:sequence>
+            <xs:element name="SRVD" type="SurveyData" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
 </xs:schema>
