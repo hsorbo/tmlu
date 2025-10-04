@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:simpleType name="DisplayPosition">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="LEFT" />
+            <xs:enumeration value="RIGHT" />
+            <xs:enumeration value="UP" />
+            <xs:enumeration value="DOWN" />
+            <xs:enumeration value="CENTER" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="LineType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="STANDARD" />
+            <xs:enumeration value="SLOPE_LEFT" />
+            <xs:enumeration value="SLOPE_RIGHT" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="SizeMode">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ABSOLUTE" />
+            <xs:enumeration value="RELATIVE" />
+            <xs:enumeration value="SWITCHABLE" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="Style">
+        <xs:sequence>
+            <xs:element name="dashArray" type="xs:double" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="dashScale" type="xs:double" />
+            <xs:element name="fillColorString" type="xs:string" />
+            <xs:element name="lineType" type="LineType"/>
+            <xs:element name="lineTypeScale" type="xs:double" />
+            <xs:element name="opacity" type="xs:double" />
+            <xs:element name="sizeMode" type="SizeMode" />
+            <xs:element name="strokeColorString" type="xs:string" />
+            <xs:element name="strokeThickness" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Layer">
+        <xs:sequence>
+            <xs:element name="constant" type="xs:boolean" />
+            <xs:element name="locked" type="xs:boolean" />
+            <xs:element name="name" type="xs:string" />
+            <xs:element name="style" type="Style" />
+            <xs:element name="visible" type="xs:boolean" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="ElementType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="LINE" />
+            <xs:enumeration value="CARTOELEMENT" />
+            <xs:enumeration value="TEMPO" />
+            <xs:enumeration value="RECTANGLE" />
+            <xs:enumeration value="SELECTION" />
+            <xs:enumeration value="SELECTIONRECTANGLE" />
+            <xs:enumeration value="MAGNET" />
+            <xs:enumeration value="NONE" />
+            <xs:enumeration value="PAGE" />
+            <xs:enumeration value="GRIP" />
+            <xs:enumeration value="ELLIPSE" />
+            <xs:enumeration value="SPLINE" />
+            <xs:enumeration value="SPLINEGRIP" />
+            <xs:enumeration value="TANGENTGRIP" />
+            <xs:enumeration value="OVERLAY" />
+            <xs:enumeration value="CONSTRAINT" />
+            <xs:enumeration value="LINKEDSURFACE" />
+            <xs:enumeration value="STATIONMAGNET" />
+            <xs:enumeration value="MAGNETEXTREMITY" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:group name="Element">
+        <xs:sequence>
+            <xs:element name="editable" type="xs:boolean" />
+            <xs:element name="ID" type="xs:int" />
+            <xs:element name="layer" type="Layer" />
+            <xs:element name="style" type="Style" minOccurs="0" maxOccurs="1" />
+            <xs:element name="type" type="ElementType" />
+            <xs:element name="ZOrder" type="xs:int" />
+        </xs:sequence>
+    </xs:group>
+
+    <xs:group name="FixedRectangle">
+        <xs:sequence>
+            <xs:group ref="Element"/>
+            <xs:element name="endCorner" type="Point" />
+            <xs:element name="interACorner" type="Point" />
+            <xs:element name="interBCorner" type="Point" />
+            <xs:element name="startCorner" type="Point" />
+        </xs:sequence>
+    </xs:group>
+
+    <xs:group name="PointBase">
+        <xs:sequence>
+            <xs:group ref="Element"/>
+            <xs:element name="positionX" type="xs:double" />
+            <xs:element name="positionY" type="xs:double" />
+        </xs:sequence>
+    </xs:group>
+
+    <xs:complexType name="Point">
+        <xs:sequence>
+            <xs:group ref="PointBase"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:group name="GripBase">
+        <xs:sequence>
+            <xs:group ref="PointBase"/>
+        </xs:sequence>
+    </xs:group>
+
+    <xs:complexType name="Grip">
+        <xs:sequence>
+            <xs:group ref="GripBase"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ConstraintSpinner">
+        <xs:sequence>
+            <xs:group ref="Element"/>
+            <xs:element name="displayPosition" type="DisplayPosition" />
+            <xs:element name="max" type="xs:double" />
+            <xs:element name="min" type="xs:double" />
+            <xs:element name="position" type="Point"/>
+            <xs:element name="scale" type="xs:double" />
+            <xs:element name="step" type="xs:double" />
+            <xs:element name="value" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TangentGrips">
+        <xs:sequence>
+            <xs:group ref="Element"/>
+            <xs:element name="centerX" type="xs:double" />
+            <xs:element name="centerY" type="xs:double" />
+            <xs:element name="inGrip" type="Grip" />
+            <xs:element name="outGrip" type="Grip" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SplineGrip">
+        <xs:sequence>
+            <xs:group ref="GripBase"/>
+            <xs:element name="activeTangent" type="xs:boolean" />
+            <xs:element name="editActive" type="xs:boolean" />
+            <xs:element name="magnetActive" type="xs:boolean" />
+            <xs:element name="originalPositionX" type="xs:double" />
+            <xs:element name="originalPositionY" type="xs:double" />
+            <xs:element name="tangentGrips" type="TangentGrips" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:group name="SplineElementBase">
+        <xs:sequence>
+            <xs:group ref="Element"/>
+            <xs:element name="SplineGrips">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="splineGrips" type="SplineGrip" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="closed" type="xs:boolean" />
+        </xs:sequence>
+    </xs:group>
+
+    <xs:complexType name="SplineElement">
+        <xs:sequence>
+            <xs:group ref="SplineElementBase"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RectangleElement">
+        <xs:sequence>
+            <xs:group ref="SplineElementBase"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="LineElement">
+        <xs:sequence>
+            <xs:group ref="SplineElementBase"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="EllipseElement">
+        <xs:sequence>
+            <xs:group ref="Element"/>
+            <xs:element name="center" type="Point" />
+            <xs:element name="radiusX" type="xs:double" />
+            <xs:element name="radiusY" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="LinkedSurfaceElement">
+        <xs:sequence>
+            <xs:group ref="SplineElementBase"/>
+            <xs:element name="LinkIDs">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="linkIDList" type="xs:int" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Constraint">
+        <xs:sequence>
+            <xs:group ref="Element"/>
+            <xs:element name="azimut" type="xs:double" />
+            <xs:element name="distance" type="xs:double" />
+            <xs:element name="originStationID" type="xs:int" />
+            <xs:element name="originalStationPositionX" type="xs:double" />
+            <xs:element name="originalStationPositionY" type="xs:double" />
+            <xs:element name="targetElementID" type="xs:int" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PageRectangle">
+        <xs:sequence>
+            <xs:group ref="FixedRectangle"/>
+            <xs:element name="bottomLeftGrip" type="Grip" />
+            <xs:element name="bottomRightGrip" type="Grip" />
+            <xs:element name="centerGrip" type="Grip" />
+            <xs:element name="paperType" type="xs:string" />
+            <xs:element name="topLeftGrip" type="Grip" />
+            <xs:element name="topRightGrip" type="Grip" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OverlayRectangle">
+        <xs:sequence>
+            <xs:group ref="FixedRectangle"/>
+            <xs:element name="designation" type="xs:string"/>
+            <xs:element name="imageName" type="xs:string"/>
+            <xs:element name="imagePath" type="xs:string"/>
+            <xs:element name="rotationAngle" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SelectionRectangle">
+        <xs:sequence>
+            <xs:group ref="FixedRectangle"/>
+            <xs:element name="heightConstraint" type="ConstraintSpinner"/>
+            <xs:element name="widthConstraint" type="ConstraintSpinner"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RadiusVector">
+        <xs:sequence>
+            <xs:element name="angle" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Angle
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="length" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Length
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TensionCorridor" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Tension Corridor
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TensionProfile" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Tension Profile
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Shape">
+        <xs:sequence>
+            <xs:element name="hasProfileAzimut" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Has Profile Azimuth
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="hasProfileTilt" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Has Profile Tilt
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="profileAzimut" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Profile Azimuth
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="profileTilt" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Profile Tilt
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="RadiusCollection">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Radius Collection
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="RadiusVector" type="RadiusVector" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en">
+                                    Radius Vector
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="StationType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="REAL" />
+            <xs:enumeration value="CLOSURE" />
+            <xs:enumeration value="VIRTUAL" />
+            <xs:enumeration value="START" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ProfileType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="VERTICAL" />
+            <xs:enumeration value="HORIZONTAL" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="SurveyData">
+        <xs:sequence>
+            <xs:element name="Azimut" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Azimuth
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ClosureToID" type="xs:int">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Closure to ID
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Color" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Color
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Comment" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Comment
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Date" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Date
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Depth" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Depth
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DepthIn" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Depth in
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Down" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Down
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Excluded" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Excluded
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Explorer" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Explorer
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="FromID" type="xs:int">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        From ID
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ID" type="xs:int">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        ID
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Inclination" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Inclination
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Latitude" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Latitude
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Left" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Left
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Length" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Length
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Locked" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Locked
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Longitude" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Longitude
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Name
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Profiletype" type="ProfileType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Profile Type
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Right" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Right
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Section" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Section
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Shape" type="Shape">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Shape
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Type" type="StationType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Type
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Up" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">
+                        Up
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="TypeAnnotation">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="LINKEDTOONESTATION" />
+            <xs:enumeration value="LINKEDTOTWOSTATION" />
+            <xs:enumeration value="LINKEDTOSECTION" />
+            <xs:enumeration value="DENSITYGRAPH" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="DensityGraph">
+        <xs:sequence>
+            <xs:element name="gridSize" type="xs:double" />
+            <xs:element name="stdAzimut" type="xs:double" />
+            <xs:element name="stdLength" type="xs:double" />
+            <xs:element name="stdDepth" type="xs:double" />
+            <xs:element name="confidencePercent" type="xs:double" />
+            <xs:element name="centerX" type="xs:double" />
+            <xs:element name="centerY" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--
+    <xs:simpleType name="FromAction">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Distance" />
+            <xs:enumeration value="Swim Distance" />
+            <xs:enumeration value="Gas Usage" />
+            <xs:enumeration value="Confidence Zone" />
+        </xs:restriction>
+    </xs:simpleType>
+    -->
+
+    <xs:complexType name="Annotation">
+        <xs:sequence>
+            <xs:element name="attachStationA" type="xs:int" />
+            <xs:element name="attachStationB" type="xs:int" />
+            <xs:element name="attachedDensityGraph" type="DensityGraph"/>
+            <xs:element name="fromAction" type="xs:string"/>
+            <xs:element name="ID" type="xs:int" />
+            <xs:element name="message" type="xs:string" />
+            <xs:element name="type" type="TypeAnnotation"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="Unit">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="m" />
+            <xs:enumeration value="ft" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="CaveFile">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="caveName" type="xs:string" />
+                <xs:element name="firstStartAbsoluteElevation" type="xs:double" />
+                <xs:element name="geoCoding" type="xs:string" minOccurs="0" maxOccurs="1" />
+                <xs:element name="ListAnnotation">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Annotation" type="Annotation" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Data">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="SurveyData" type="SurveyData" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="unit" type="Unit" />
+                <xs:element name="useMagneticAzimuth" type="xs:boolean" />
+                <xs:element name="Constraints">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="constraints" type="Constraint" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CartoLine">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="lineElements" type="LineElement" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CartoPage">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="pageRectangles" type="PageRectangle" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CartoRectangle">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="rectangleElements" type="RectangleElement" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CartoSelection">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="selectionRectangleElements" type="SelectionRectangle" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CartoEllipse">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="ellipseElements" type="EllipseElement" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CartoSpline">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="splineElements" type="SplineElement" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Layers">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="layerList" type="Layer" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CartoOverlay">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="overlayElements" type="OverlayRectangle" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CartoLinkedSurface">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="linkedSurfaceElements" type="LinkedSurfaceElement" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
