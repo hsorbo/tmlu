@@ -50,6 +50,9 @@
                 <xsl:when test="local-name() = 'SH'">Shape</xsl:when>
                 <xsl:when test="local-name() = 'TY'">Type</xsl:when>
                 <xsl:when test="local-name() = 'U'">Up</xsl:when>
+                <xsl:when test="local-name() = 'UU'">UU</xsl:when>
+                <xsl:when test="local-name() = 'XMLExplorer'">XMLExplorer</xsl:when>
+                <xsl:when test="local-name() = 'XMLSurveyor'">XMLSurveyor</xsl:when>
 
                 <xsl:when test="local-name() = 'SRVD'">SurveyData</xsl:when>
 
